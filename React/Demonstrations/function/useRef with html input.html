@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React demo</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      // https://www.youtube.com/watch?v=t2ypzz6gJm0 ,https://www.w3schools.com/react/react_useref.asp
+      //hooks can be used ONLY in a function components , hooks cannot be in if loop statements
+      //useRef is a hook that creates a variable persist its value between renders ,update to the variable.current does NOT cause rerender
+      //useRef is used mostly to refernce html elements
+      let Clicker = () => {
+        const inputElement = React.useRef();
+        const rendersCount = React.useRef(0);
+        //
+        console.log("render " + rendersCount.current++);
+        //
+        return (
+          <>
+            <input type="text" placeholder="enter text" ref={inputElement} />
+            <button
+              onClick={() => {
+                console.log('inputElement',inputElement.current.value);
+              }}
+            >
+              input to console log
+            </button>
+          </>
+        );
+      };
+      ReactDOM.render(<Clicker />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

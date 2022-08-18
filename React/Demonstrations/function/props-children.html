@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+
+    <div id="header1"></div>
+    <div id="header2"></div>
+    <div id="header3"></div>
+
+    <script type="text/babel">
+      
+      function Header(props) {
+        console.log(props.children);
+        if (props.children) return props.children;
+        else if (props.text) return <header>{props.text}</header>;
+        else return null;
+      }
+      //
+      ReactDOM.render(
+        <Header text="first"/>,
+        document.getElementById("header1")
+      );
+      ReactDOM.render(
+        <Header></Header>,
+        document.getElementById("header2")
+      );
+      ReactDOM.render(
+        <Header />,
+        document.getElementById("header3")
+      );
+    </script>
+  </body>
+</html>

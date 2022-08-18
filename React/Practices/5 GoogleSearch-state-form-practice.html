@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+      form {
+        width: 450px;
+        margin: auto;
+        border: 1px solid black;
+      }
+      form * {
+        margin: 5px;
+        display: inline-block;
+      }
+
+      label {
+        font-weight: bold;
+        width: 150px;
+      }
+
+      input,
+      select {
+        width: 250px;
+      }
+
+      button {
+        display: block;
+        color: green;
+        border-radius: 25px;
+      }
+
+      @media screen and (max-width: 600px) {
+        form {
+          width: 270px;
+        }
+        form * {
+          display: block;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function Form(props) {
+        //
+        return (
+          <form
+            action="https://google.co.il/search"
+            target="_blank"
+          >
+            <label>Search text:</label>
+            <input
+              type="text"
+              name="q"
+              placeholder="enter text"
+            />
+
+            <label>That was updated in:</label>
+
+            <select name="as_qdr">
+              <option value="">Any time</option>
+              <option value="d">Previous 24 hours</option>
+              <option value="w">Previous seven days</option>
+              <option value="m">Previous month</option>
+              <option value="y">Past year</option>
+            </select>
+
+            <label htmlFor="lr">Search only pages written in hebrew:</label>
+            <input type="checkbox" name="lr" id="lr" />
+
+            <label>Number of results:</label>
+            <input
+              type="text"
+              name="num"
+              placeholder="enter number"
+            />
+
+            <button type="submit">Ask google</button>
+          </form>
+        );
+      }
+      ReactDOM.render(<Form />, document.getElementById("root"));
+    </script>
+
+    <script>
+      const minResults = 1;
+      const maxResults = 25;
+      const maxWordLength = 10;
+      const forbidenWords = ["sex", "porn", "violence", "murder"];
+      //
+      //return a validation message in case the input is invalid
+       function validateQ(qValue) {
+        let postfix = "the search box";
+        if (hasChar(qValue) && qValue.trim().length > 1) {
+          if (isNumber(qValue)) return "*Please enter only text " + postfix;
+          else if (hasATooLongWord(qValue))
+            return `*Please enter words not longer then ${maxWordLength} ${postfix}`;
+          else if (hasForbidenWord(qValue))
+            return `*Please enter words other then ${forbidenWords} ${postfix}`;
+        } else {
+          return `*Please enter at least 2 characters ${postfix}`;
+        }
+        return null;
+      }
+      //return a validation message in case the input is invalid
+       function validateNum(numValue) {
+        if (!isInRange(numValue))
+          return `*Please enter number ${minResults} to ${maxResults} to tell google how many search results we want`;
+        else {
+          return null;
+        }
+      }
+      //
+      function isValidFormData(qValue, numValue) {
+        let validationMessages = [];
+        let validationMessage = validateQ(qValue);
+        //
+        if (validationMessage != null)
+          validationMessages.push(validationMessage);
+        //
+        validationMessage = validateNum(numValue);
+        if (validationMessage != null)
+          validationMessages.push(validationMessage);
+        //
+        if (validationMessages.length > 0) {
+          let validationMessage2Display = "";
+          validationMessages.forEach((vm) => {
+            validationMessage2Display += vm + "\n";
+          });
+          alert(validationMessage2Display);
+          return false;
+        } else {
+          return true;
+        }
+      }
+      //
+      function isInRange(text) {
+        return (
+          isNumber(text) &&
+          parseInt(text) >= minResults &&
+          parseInt(text) <= maxResults
+        );
+      }
+      //
+      function hasForbidenWord(text) {
+        if (hasChar(text)) {
+          for (let index = 0; index < forbidenWords.length; index++) {
+            if (text.includes(forbidenWords[index])) return true;
+          }
+        }
+        return false;
+      }
+      //
+      function hasATooLongWord(text) {
+        let words = text.split(" ");
+        for (let index = 0; index < words.length; index++) {
+          if (words[index].length > maxWordLength) return true;
+        }
+        return false;
+      }
+      //
+      function hasChar(text) {
+        return (
+          text != undefined && text != null && text.toString().trim().length > 0
+        );
+      }
+      //
+      function isNumber(text) {
+        if ((hasChar(text) && typeof text == "number") || !isNaN(text)) {
+          return true;
+        }
+        return false;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React useEffect , useState practice</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!--
+        https://www.w3schools.com/js/js_api_fetch.asp , https://www.w3schools.com/react/react_useeffect.asp ,https://www.w3schools.com/react/react_usestate.asp
+      Create a Page component that has top navigation , below it ,the main content.
+      The top navigation consists NavigationItem components created from the links array.
+      Pressing on one of the NavigationItem displays its json bellow the top navigation in Content component, 
+      The current displayed NavigationItem item has a white background ,the others grey.
+      Use axios to get the data from the service.
+    -->
+    <script type="text/babel">
+      const links = [
+        { name: "Users", url: "https://jsonplaceholder.typicode.com/users" },
+        { name: "Posts", url: "https://jsonplaceholder.typicode.com/posts" },
+        { name: "Photos", url: "https://jsonplaceholder.typicode.com/photos" },
+      ];
+      //
+      const Page = (props) => {
+        return (
+          <main>
+            <nav></nav>
+            <Content />
+          </main>
+        );
+      }
+      //
+      const Navigation = (props) => {
+        return <button></button>;
+      }
+      //
+      const Content = (props) => {
+        return <pre></pre>;
+      }
+      //
+      ReactDOM.render(<Page links={links} />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React forms</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      // https://www.youtube.com/watch?v=t2ypzz6gJm0 ,https://www.w3schools.com/react/react_useref.asp
+      //hooks can be used ONLY in a function components , hooks cannot be in if loop statements
+      //useRef is a hook that creates a variable persist its value between renders ,update to the variable.current does NOT cause rerender
+      //useRef is used mostly to refernce html elements
+      //create a JobApplication component that displayes alert with the user's input choices without submiting the form
+      let JobApplication = () => {
+       
+        //
+        function send(e) {
+        }
+        //
+        return (
+          <>
+            <h1>Job application</h1>
+            <form
+              style={{ display: "flex", flexDirection: "column" }}
+              onSubmit={() => send(e)}
+            >
+              <input type="text" placeholder="enter you name" />
+              <label>
+                Have working expirience:
+                <input
+                  type="checkbox"
+                  id="HasExpirience"
+                />
+              </label>
+              <div>
+                Prefered postion:
+                <label>
+                  Fullstack
+                  <input
+                    type="radio"
+                    name="PreferedPostion"
+                    value="Fullstack"
+                  />
+                </label>
+                <label>
+                  Frontend
+                  <input
+                    type="radio"
+                    name="PreferedPostion"
+                    value="Frontend"
+                  />
+                </label>
+                <label>
+                  Backend
+                  <input
+                    type="radio"
+                    name="PreferedPostion"
+                    value="Backend"
+                  />
+                </label>
+                <label>
+                  Any
+                  <input
+                    type="radio"
+                    name="PreferedPostion"
+                    value="Any"
+                  />
+                </label>
+              </div>
+              <label>
+                Prefered location :
+                <select>
+                  <option value="Any">Any</option>
+                  <option value="Israel">Israel</option>
+                  <option value="Abroad">Abroad</option>
+                  <option value="Home">Home</option>
+                </select>
+              </label>
+
+              <button onClick={send}>
+                Send!
+              </button>
+            </form>
+          </>
+        );
+      };
+      ReactDOM.render(<JobApplication />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

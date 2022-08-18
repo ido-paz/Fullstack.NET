@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React demo</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      // https://reactjs.org/docs/state-and-lifecycle.html , https://www.w3schools.com/react/react_class.asp
+
+      function Frame() {
+        let [closed, setClosed] = React.useState(false);
+
+        if (closed) {
+          return (
+            <button onClick={() => setClosed(false)}>Display clock ⏰</button>
+          );
+        } else {
+          return (
+            <div>
+              <div style={{ textAligh: "left" }}>
+                <button onClick={() => setClosed(true)}>Hide clock ❌</button>
+              </div>
+              <div>
+                <Clock />;
+              </div>
+            </div>
+          );
+        }
+      }
+      //
+      function Clock() {
+        let [timerID, setTimerID] = React.useState(null);
+        let [date, setDate] = React.useState(new Date());
+
+        React.useEffect(() => {
+          console.log("useEffect mount");
+          toggleTimer();
+          return () => {
+            // Anything in here is fired on component unmount.
+            console.log("useEffect unmount");
+            clearInterval(timerID);
+          };
+        }, []);
+
+        function toggleTimer() {
+          if (timerID) {
+            clearInterval(timerID);
+            timerID = null;
+          } else {
+            timerID = setInterval(() => setDate(new Date()), 1000);
+          }
+          setTimerID(timerID);
+        }
+        //
+        console.log('render');
+        //
+        return (
+          <div>
+            <h1>Local time in Israel:</h1>
+            <h2>{date.toLocaleTimeString()}.</h2>
+            <button onClick={() => toggleTimer()}>
+              {timerID ? "Stop" : "Start"} timer
+            </button>
+          </div>
+        );
+      }
+
+      ReactDOM.render(<Frame />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

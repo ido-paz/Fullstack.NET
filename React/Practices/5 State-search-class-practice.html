@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+      .Search {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+      }
+      .Search div {
+        border: 1px solid black;
+        display: flex;
+        flex-direction: row;
+      }
+      .Search input {
+        border: 0px;
+        width: 85%;
+        padding: 5px;
+      }
+      .List {
+        display: flex;
+        background-color: #eee;
+        border: solid 1px;
+        padding: 0.25ch;
+        gap: 0.25ch;
+      }
+      .List.vertical {
+        flex-direction: column;
+      }
+      .List.horizontal {
+        flex-direction: row;
+      }
+      .ListItem {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      let users = [
+        { id: 1, name: "david" },
+        { id: 2, name: "mor" },
+        { id: 3, name: "rona" },
+        { id: 4, name: "ido" },
+        { id: 5, name: "bar" },
+        { id: 6, name: "musa" },
+        { id: 7, name: "ravit" },
+      ];
+      //
+      class Search extends React.Component {
+        render() {
+          return <div className="Search"></div>;
+        }
+      }
+      //
+      class List extends React.Component {
+        render() {
+          return <div></div>
+        }
+      }
+      //
+      ReactDOM.render(<Search />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

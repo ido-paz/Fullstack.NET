@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>RenderingVariable</title>
+</head>
+<body>
+    <header>
+        <p>
+            react.development.js ,react-dom.development.js let us write React code in our JavaScripts:
+        </p>
+        <p>
+            babel.js : allows us to write JSX syntax and ES6 in older browsers.
+        </p>
+    </header>
+    <section>
+        <p>using React to create tag inside existing tag</p>
+        <div id="root">
+
+        </div>
+        <script type="text/babel">
+            let hello = <h1>Hello World!</h1>;
+      
+            ReactDOM.render(hello, document.getElementById('root'))
+        </script>               
+    </section>    
+</body>
+</html>

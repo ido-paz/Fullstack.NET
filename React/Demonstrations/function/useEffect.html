@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React demo</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      // https://www.youtube.com/watch?v=0ZJgIjIuY7U&t=245s
+      //hooks can be used ONLY in a function components , hooks cannot be in if loop statements
+      //useEffect is a hook that executes a function depended on its second argument:
+      //1. No argument = run on any render
+      //2. Empty array = runs only once,in first render
+      //3. Array of the depended state variables = run only on depended state variables change
+      let Clicker = ()=>{
+        const [count,setCount] = React.useState(0);
+        //
+        console.log('render');
+        //
+        React.useEffect(()=>{
+          console.log('useEffect on any render');
+        })
+        //
+        React.useEffect(()=>{
+          console.log('useEffect only once,in first render');
+        },[])
+        //
+        React.useEffect(()=>{
+          console.log('useEffect only on count change');
+        },[count])
+        //
+        return <>
+               <button onClick={()=>console.log(Date.now())}>log date</button>
+               <button onClick={()=>{setCount(count+1);console.log(count)}}>add count</button>
+               </>
+      }
+      ReactDOM.render(<Clicker/>,document.getElementById('root'));
+    </script>
+  
+  </body>
+</html>

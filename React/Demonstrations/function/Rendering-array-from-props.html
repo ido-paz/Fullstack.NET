@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <title>RenderList</title>
+</head>
+<body>
+    <header>
+       Convert string array 'ido','anna','jake','judi' to html list items using map function
+    </header>
+    <hr/>
+    <section>               
+        <div id="root">
+
+        </div>           
+    </section>    
+
+    <script type="text/babel">
+        let names =['rob','anna','jake','judi'];
+        //
+        function DisplayList(props) {
+            if (props.list) {
+                let listItems = props.list.map((item,index)=>{
+                                                    return <li key={index}>{item}</li>
+                                                });
+                //
+                return <ul>
+                        {listItems}
+                    </ul>
+            }
+            else{
+                return <p>no data</p>
+            }
+        }      
+        //
+        ReactDOM.render(<DisplayList list={names}/>, document.getElementById('root'))
+    </script>   
+</body>
+</html>

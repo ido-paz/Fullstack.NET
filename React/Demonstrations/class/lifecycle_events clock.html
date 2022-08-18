@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React demo</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      // https://reactjs.org/docs/state-and-lifecycle.html , https://www.w3schools.com/react/react_class.asp
+
+      class Frame extends React.Component {
+        state = { closed: false };
+        render() {
+          if (this.state.closed)
+            return (
+              <button onClick={() => this.setState({ closed: false })}>
+                Display clock ⏰
+              </button>
+            );
+          else {
+            return (
+              <div>
+                <div style={{textAligh:'left'}}>
+                  <button onClick={() => this.setState({ closed: true })}>
+                    Hide clock ❌
+                  </button>
+                </div>
+                <div>
+                  <Clock />;
+                </div>
+              </div>
+            );
+          }
+        }
+      }
+      //
+      class Clock extends React.Component {
+        constructor(props) {
+          super(props);
+          console.log("constructor");
+          this.state = { timerID: null, date: new Date() };
+        }
+
+        componentDidMount() {
+          console.log("componentDidMount");
+          this.toggleTimer();
+        }
+
+        toggleTimer = () => {
+          let timerID;
+          if (this.state.timerID) {
+            clearInterval(this.state.timerID);
+            timerID = null;
+          } else {
+            timerID = setInterval(() => this.tick(), 1000);
+          }
+          this.setState({ timerID: timerID });
+        };
+
+        componentWillUnmount() {
+          console.log("componentWillUnmount");
+          clearInterval(this.state.timerID);
+        }
+        componentDidUpdate() {
+          console.log("componentDidUpdate");
+        }
+        tick() {
+          this.setState({
+            date: new Date(),
+          });
+        }
+
+        render() {
+          console.log("render");
+          return (
+            <div>
+              <h1>Local time in Israel:</h1>
+              <h2>{this.state.date.toLocaleTimeString()}.</h2>
+              <button onClick={() => this.toggleTimer()}>
+                {this.state.timerID ? "Stop" : "Start"} timer
+              </button>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<Frame />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

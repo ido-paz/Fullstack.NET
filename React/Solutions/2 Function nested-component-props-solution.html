@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React practice</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+      .greyBackground {
+        background-color: grey;
+        color: white;
+        border-bottom: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      /*
+      Create react Message component that consists Title, Body components
+      1.The Message component can recieve the title,body text from its parent
+      2.The Title ,Body components will take their text from Message component
+      3.The Message component should render only if at least title property has text 
+      4.The Message component should render its text in div tag
+      5.The Title component should render its text in header tag
+      6.The Body component should render its text in section tag
+      7.The Message component should have the following CSS rule applied "margin: auto; border: 1px solid black; width: 250px;"
+      8.The Title component should take its design from CSS class named "greyBackground" that contains those rules "background-color: grey;color: white;border-bottom: 1px solid black;" 
+      9.The Body component should have the following CSS rule applied "min-height:20px"
+      */
+      function Message(props) {
+        if (props.title == undefined) {
+          return "";
+        } else {
+          return (
+            <div
+              style={{
+                margin: "auto",
+                border: "1px solid black",
+                width: "200px",
+              }}
+            >
+              <Title text={props.title} />
+              <Body text={props.body} />
+            </div>
+          );
+        }
+      }
+      //
+      function Title(props) {
+        return <header className="greyBackground">{props.text}</header>;
+      }
+      //
+      function Body(props) {
+        return (
+          <section style={{ minHeight: "20px" }}>
+            { props.text }
+          </section>
+        );
+      }
+      //
+      ReactDOM.render(
+        <Message
+          title="System message"
+          body="Your computer will shutdown in 5 minutes...."
+        />,
+        document.getElementById("root")
+      );
+    </script>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React demo</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      // https://www.youtube.com/watch?v=O6P86uwfdR0
+      //hooks can be used ONLY in a function components , hooks cannot be in if loop statements
+      //useState is a hook = is a function that recieves expression or a function and returns an array with two items
+      //The first item is the variable that holds the current state that persists between renders
+      //The seconds is the function that updates the state
+      //
+      function getValue(v) {
+        console.log("getValue");
+        return v;
+      }
+      //
+      function getValue2(v) {
+        console.log("getValue2");
+        return v;
+      }
+
+      let Clicker = () => {
+        const [count, setCount] = React.useState(getValue(0)); //getValue executes on every render
+        const [count2, setCount2] = React.useState(() => getValue2(0)); //getValue2 executes only once
+        //
+        console.log("render");
+        //
+        return (
+          <>
+            <button onClick={() => console.log(Date.now())}>log date</button>
+            <button
+              onClick={() => {
+                setCount(count + 1);
+                console.log(count);
+              }}
+            >
+              add count
+            </button>
+            <button
+              onClick={() => {
+                setCount2(count2 + 1);
+                console.log(count2);
+              }}
+            >
+              add count2
+            </button>
+          </>
+        );
+      };
+      ReactDOM.render(<Clicker />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

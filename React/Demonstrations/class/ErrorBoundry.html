@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React demo</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      // https://reactjs.org/docs/error-boundaries.html
+      class P extends React.Component {
+        state = {error:null,}
+        //
+        render() {
+          if(this.state.error) 
+            return 'error accured during render,look at console log'
+
+          return (
+            <div>
+              P1
+              <C1 />
+              <C2 />
+            </div>
+          );
+        }
+        //
+        static getDerivedStateFromError(error) {
+          // Update state so the next render will show the fallback UI.
+          console.log(error);
+          return { error: error };
+        }
+        //
+        // componentDidCatch(error, errorInfo) {
+        //   // You can also log the error to an error reporting service
+        //   console.log(error, errorInfo);
+        // }
+      }
+
+      function C1() {
+        return <div>C1</div>;
+      }
+      function C2() {
+        throw Error("C2 error");
+        return <div>C2</div>;
+      }
+
+      ReactDOM.render(<P />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

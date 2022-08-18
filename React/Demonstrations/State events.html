@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React demo</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root1"></div>
+    ‍
+    <div id="root3"></div>
+    <script type="text/babel">
+      function Button1(props) {
+        let [text, setText] = React.useState("b1");
+        function setT() {
+          console.log(this);
+          if (text.length < 5) {
+            setText(text + 1)
+          }
+        }
+        console.log("render fc");
+        //
+        return (
+          <button id="b1" onClick={() =>setT()}>
+            {text}
+          </button>
+        );
+      }
+      //
+      class Button3 extends React.Component {
+        state = { text: "b3" };
+        //
+        setT() {
+          console.log(this);
+          if (this.state.text.length < 5) {
+            this.setState({ text: this.state.text + 3 });
+          }
+        }
+        //
+        render() {
+          console.log("render cc");
+          return (
+            <button id="b3" onClick={() => this.setT()}>
+              {this.state.text}
+            </button>
+          );
+        }
+      }
+
+      ReactDOM.render(<Button1 />, document.getElementById("root1"));
+      ReactDOM.render(<Button3 />, document.getElementById("root3"));
+    </script>
+  </body>
+</html>

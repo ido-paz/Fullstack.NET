@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React demo</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root1"></div>
+    <div id="root2"></div>
+    <div id="root3"></div>
+    <div id="root4"></div>
+‍
+    <script type="text/babel">
+      function Button1(props) {
+        return (
+          <button id="b1" onClick={() => console.log(this)}>
+            b1
+          </button>
+        );
+      }
+      function Button2(props) {
+        function onClickHandler(e,o) {
+          console.log(e,o);
+        }
+        return (
+          <button id="b2" onClick={(e) => onClickHandler(e, this)}>
+            b2
+          </button>
+        );
+      }
+      //
+      class Button3 extends React.Component {
+        render() {
+          return (
+            <button id="b3" onClick={() => console.log(this)}>
+              b3
+            </button>
+          );
+        }
+      }
+      //
+      class Button4 extends React.Component {
+        onClickHandler = (e,o) => {
+          console.log(e,o);
+        }
+        //
+        render() {
+          return (
+            <button id="b4" onClick={(e) => this.onClickHandler(e,this)}>
+              b4
+            </button>
+          );
+        }
+      }
+
+      ReactDOM.render(<Button1 />, document.getElementById("root1"));
+      ReactDOM.render(<Button2 />, document.getElementById("root2"));
+      ReactDOM.render(<Button3 />, document.getElementById("root3"));
+      ReactDOM.render(<Button4 />, document.getElementById("root4"));
+    </script>
+  </body>
+</html>

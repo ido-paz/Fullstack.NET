@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React practice</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+      .List {
+        display: inline-flex;
+        border: solid 1px;
+        padding: 0.25ch;
+        gap: 0.25ch;
+      }
+      .List.vertical {
+        flex-direction: column;
+      }
+      .List.horizontal {
+        flex-direction: row;
+      }
+      .ListItem {
+        background-color: #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      // create a component which receives 2 props
+      // 1. items = an array of strings to get renderer in the list
+      // 2. direction = either "vertical" or "horizontal" ,default is vertical
+      // to say which dirction it should render the list
+      function List({ items = [],direction = "vertical" }) {
+        return (
+          <div className={"List " + direction}>
+            {items.map((item, i) => (
+              <div className="ListItem" key={i}>
+                {item}
+              </div>
+            ))}
+          </div>
+        );
+      }
+      //
+      ReactDOM.render(
+        <List
+          items={["Win", "Mac", "Linux", "Android"]}
+          direction="vertical"
+        />,
+        document.getElementById("root")
+      );
+    </script>
+  </body>
+</html>

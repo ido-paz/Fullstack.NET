@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React practice</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="greet1"></div>
+    <div id="greet2"></div>
+    <div id="greet3"></div>
+    <div id="greet4"></div>
+    <div id="greet5"></div>
+    <script type="text/babel">
+      /*
+      Use ReactDOM.render to append <h1>Good evening</h1> html
+      to the existing div's with id "greetX" using:
+          1. JSX expression 
+          2. Variable created using React.createElement object
+          3. Variable that contains JSX expression 
+          4. function that returns JSX expression
+          5. component that returns JSX expression
+      */
+      const greet2 = React.createElement('h1',null,'Hello 2');
+      let greet3= <h1>Hello 3</h1>;
+      function greet4(text) {
+        return <h1>{text}</h1>;
+      }
+      function Greet5() {
+        return <h1>Hello 5</h1>;
+      }
+      //
+      ReactDOM.render(<h1>Hello 1</h1>,document.getElementById('greet1'));
+      ReactDOM.render(greet2,document.getElementById('greet2'));
+      ReactDOM.render(greet3,document.getElementById('greet3'));
+      ReactDOM.render(greet4('Hello 4') ,document.getElementById('greet4'));
+      ReactDOM.render(<Greet5/> ,document.getElementById('greet5'));
+
+    </script>
+  </body>
+</html>
