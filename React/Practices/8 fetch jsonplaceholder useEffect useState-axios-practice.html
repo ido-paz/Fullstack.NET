@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React useEffect , useState practice</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!--
+      https://www.npmjs.com/package/axios , https://www.w3schools.com/react/react_useeffect.asp ,https://www.w3schools.com/react/react_usestate.asp
+      Create a Page component that has top navigation , below it ,the main content.
+      The top navigation consists Navigation components created from the links array.
+      Pressing on one of the Navigation components displays its json bellow the top navigation in View component, 
+      The current displayed Navigation component has a white background ,the others grey.
+      Use axios to fetch the data from the service.
+    -->
+    <script type="text/babel">
+      const links = [
+        { name: "Users", url: "https://jsonplaceholder.typicode.com/users" },
+        { name: "Posts", url: "https://jsonplaceholder.typicode.com/posts" },
+        { name: "Photos", url: "https://jsonplaceholder.typicode.com/photos" },
+      ];
+      //
+      const Page = ({ links }) => {
+        return (
+          <main>
+            <nav>
+             {/*enter Navigation components*/}
+            </nav>
+            <section>
+            {/*enter View component*/}
+            </section>
+          </main>
+        );
+      };
+
+      const Navigation = () => {
+        return ""
+      };
+      //
+      //
+      const View = () => {
+        return "";
+      };
+      //
+      ReactDOM.render(<Page links={links} />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

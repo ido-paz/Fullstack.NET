@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React demo</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      // https://www.youtube.com/watch?v=5LrDIWkK_Bc , https://www.w3schools.com/react/react_usecontext.asp
+      //hooks can be used ONLY in a function components , hooks cannot be in if loop statements
+      //context enables any component that is inside the context
+      //useContext is a hook = is a function that recieves expression or a function and returns an array with two items
+      //1. Use createContext function to create a  variable
+      //2. Wrap the child Components that needs access to XContext with XContext.Provider
+      //3. Set XContext.Provider value with the value that child Components needs to access
+      //4. To access the value in a child function component use useContext(XContext) function
+      //5. To access the value in a child class component wrap the return with XContext.Consumer and use function to access the value
+      const CountContext = React.createContext();
+      let L3 = () => {
+        let { count, setCount } = React.useContext(CountContext);
+        return (
+          <>
+            <div>
+              L3 , {count}
+              <button onClick={() => setCount(count + 1)}>Add</button>
+            </div>
+          </>
+        );
+      }
+      //
+      class L2 extends React.Component {
+        render() {
+          return (
+            <CountContext.Consumer>
+              {({ count, setCount }) => {
+                return (
+                  <>
+                    <div>
+                      L2 {count}
+                      <button onClick={() => setCount(count + 1)}>Add</button>
+                    </div>
+                    <L3 />
+                  </>
+                );
+              }}
+            </CountContext.Consumer>
+          );
+        }
+      }
+      //
+      let L1 = () => {
+        let { count } = React.useContext(CountContext);
+        return (
+          <>
+            <div>L1, {count}</div>
+            <L2 />
+          </>
+        );
+      };
+      let Root = () => {
+        let [count, setCount] = React.useState(0);
+        return (
+          <>
+            <CountContext.Provider value={{ count, setCount }}>
+              <div>
+                Root , <button onClick={() => setCount(count + 1)}>Add</button>
+              </div>
+              <L1 />
+            </CountContext.Provider>
+          </>
+        );
+      };
+      ReactDOM.render(<Root />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

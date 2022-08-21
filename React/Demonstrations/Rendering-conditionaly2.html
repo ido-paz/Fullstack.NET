@@ -17,9 +17,12 @@
   </head>
   <body>
     <div id="root"></div>
-    <script type="text/babel">
 
-      ReactDOM.render("Hello 2 you", document.getElementById("root"));
+    <script type="text/babel">
+      const root =  document.getElementById("root");
+      let selection = prompt('what would you choose the red pill OR the blue pill?')
+      if (selection=='red') ReactDOM.render("you chose red",root);
+      else ReactDOM.render("you chose blue", root);
     </script>
   </body>
 </html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React useEffect , useState practice</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+      .view {
+        display: flex;
+        flex-flow: column;
+        flex-wrap: wrap;
+      }
+      .selected {
+        background-color: white;
+      }
+      section header {
+        font-weight: bold;
+        text-transform: capitalize;
+      }
+      .users span {
+        width: 33%;
+        display: inline-block;
+      }
+      .posts span {
+        width: 50%;
+        display: inline-block;
+      }
+      .photos span {
+        width: 33%;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!--
+      https://www.npmjs.com/package/axios , https://www.w3schools.com/react/react_useeffect.asp ,https://www.w3schools.com/react/react_usestate.asp
+      Create a Page component that has top navigation , below it ,the main content.
+      The top navigation consists Navigation components created from the links array.
+      Pressing on one of the Navigation components fetches the json from the url and 
+      displays each json array item fields in div element (for each row) and span element (for each field) in the View component, 
+      The current displayed Navigation component has a white background ,the others grey.
+      Use axios to fetch the data from the service.
+    -->
+    <script type="text/babel">
+      const links = [
+        {
+          name: "Users",
+          url: "https://jsonplaceholder.typicode.com/users",
+          fields: ["id", "email", "phone"],
+        },
+        {
+          name: "Posts",
+          url: "https://jsonplaceholder.typicode.com/posts",
+          fields: ["id", "title"],
+        },
+        {
+          name: "Photos",
+          url: "https://jsonplaceholder.typicode.com/photos",
+          fields: ["id", "title", "url"],
+        },
+      ];
+      //
+      const Page = ({ links }) => {
+        const [selectedName, setSelectedName] = React.useState(links[0].name);
+        const [selectedUrl, setSelectedUrl] = React.useState(links[0].url);
+        const [selectedFields, setSelectedFields] = React.useState(
+          links[0].fields
+        );
+        //
+        const onSelectName = (name) => {
+          let li = links.findIndex(
+            (l) => l.name.toLowerCase() === name.toLowerCase()
+          );
+          setSelectedName(name);
+          setSelectedUrl(links[li].url);
+          setSelectedFields(links[li].fields);
+        };
+        //
+        return (
+          <main>
+            <nav>
+              {links.map((l, i) => {
+                return (
+                  <Navigation
+                    key={i}
+                    name={l.name}
+                    isSelected={l.name === selectedName}
+                    onSelectName={onSelectName}
+                  />
+                );
+              })}
+            </nav>
+            <View
+              url={selectedUrl}
+              fields={selectedFields}
+              name={selectedName.toLowerCase()}
+            />
+          </main>
+        );
+      };
+
+      const Navigation = ({ name, isSelected, onSelectName }) => {
+        return (
+          <button
+            onClick={() => onSelectName(name)}
+            className={isSelected ? "selected" : ""}
+          >
+            {name}
+          </button>
+        );
+      };
+      //
+      const View = ({ url, fields, name }) => {
+        let [data, setData] = React.useState("");
+        let fieldElements = fields.map((f, i) => <span key={i}>{f}</span>);
+        //
+        React.useEffect(() => {
+          axios.get(url).then((response) => {
+            setData(response.data);
+          });
+        }, [data]);
+        //
+        return (
+          <section className={name + " view"}>
+            <header>{fieldElements}</header>
+            {data
+              ? data.map((d, i) => {
+                  return (
+                    <div key={i}>
+                      {fields.map((f, j) => (
+                        <span key={j}>{d[f]}</span>
+                      ))}
+                    </div>
+                  );
+                })
+              : ""}
+          </section>
+        );
+      };
+      //
+      ReactDOM.render(<Page links={links} />, document.getElementById("root"));
+    </script>
+  </body>
+</html>
