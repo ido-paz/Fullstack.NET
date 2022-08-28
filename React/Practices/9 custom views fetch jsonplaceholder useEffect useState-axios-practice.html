@@ -67,81 +67,25 @@
       ];
       //
       const Page = ({ links }) => {
-        const [selectedName, setSelectedName] = React.useState(links[0].name);
-        const [selectedUrl, setSelectedUrl] = React.useState(links[0].url);
-        const [selectedFields, setSelectedFields] = React.useState(
-          links[0].fields
-        );
-        //
-        const onSelectName = (name) => {
-          let li = links.findIndex(
-            (l) => l.name.toLowerCase() === name.toLowerCase()
-          );
-          setSelectedName(name);
-          setSelectedUrl(links[li].url);
-          setSelectedFields(links[li].fields);
-        };
-        //
         return (
           <main>
             <nav>
-              {links.map((l, i) => {
-                return (
-                  <Navigation
-                    key={i}
-                    name={l.name}
-                    isSelected={l.name === selectedName}
-                    onSelectName={onSelectName}
-                  />
-                );
-              })}
+             {/*enter Navigation components*/}
             </nav>
-            <View
-              url={selectedUrl}
-              fields={selectedFields}
-              name={selectedName.toLowerCase()}
-            />
+            <section>
+            {/*enter View component*/}
+            </section>
           </main>
         );
       };
 
-      const Navigation = ({ name, isSelected, onSelectName }) => {
-        return (
-          <button
-            onClick={() => onSelectName(name)}
-            className={isSelected ? "selected" : ""}
-          >
-            {name}
-          </button>
-        );
+      const Navigation = () => {
+        return ""
       };
       //
-      const View = ({ url, fields, name }) => {
-        let [data, setData] = React.useState("");
-        let fieldElements = fields.map((f, i) => <span key={i}>{f}</span>);
-        //
-        React.useEffect(() => {
-          axios.get(url).then((response) => {
-            setData(response.data);
-          });
-        }, [data]);
-        //
-        return (
-          <section className={name + " view"}>
-            <header>{fieldElements}</header>
-            {data
-              ? data.map((d, i) => {
-                  return (
-                    <div key={i}>
-                      {fields.map((f, j) => (
-                        <span key={j}>{d[f]}</span>
-                      ))}
-                    </div>
-                  );
-                })
-              : ""}
-          </section>
-        );
+      //
+      const View = () => {
+        return "";
       };
       //
       ReactDOM.render(<Page links={links} />, document.getElementById("root"));
