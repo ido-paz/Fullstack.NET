@@ -1,5 +1,5 @@
-C# topics practices
-<hr/>
+# C# topics practices
+https://www.w3schools.com/cs/
 
 1. Variables
 2. Conditions
