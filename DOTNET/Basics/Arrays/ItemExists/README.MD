@@ -1,0 +1,1 @@
+Create a function that recieves a number array, and a number and returns if the the number exists in the number array
