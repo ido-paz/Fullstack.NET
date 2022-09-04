@@ -1,9 +1,5 @@
-Functions practice
-<hr/>
+# Functions practice
 Create 3 functions :
-<br/>
-PrintStars - prints '********************"
-<br/>
-Sum - recieve 2 int arguments and returns their addition result.
-<br/>
-Print - recieves string parameter and prints it.
+1. PrintStars - prints '********************"
+2. Sum - recieve 2 int arguments and returns their addition result.
+3. Print - recieves string parameter and prints it.
