@@ -1,0 +1,11 @@
+# Classes practice
+* Create User class that holds UserName,Password string fields ,its constructors (overloading) can recieve :
+1. No arguments
+2. One string CSV argument in the format [userName],[password] (for example "ido,1234")
+3. Two string arguments 
+4. Add Created datetime field and initialze it to the date time of the user creation.
+5. Add Count field that holds the number of users created
+6. Add ID int field that holds the unique id of the created user
+7. Add GetCount method that returns the number of users created
+8. Create GetDetails method that returns all the instance fields in CSV format.
+* avoid code repitition
