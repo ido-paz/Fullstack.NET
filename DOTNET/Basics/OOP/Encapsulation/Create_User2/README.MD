@@ -10,6 +10,7 @@
 6. Add ID int field that holds the unique id of the created user
 7. Add GetCount method that returns the number of users created
 8. Create GetDetails method that returns all the instance fields in CSV
-9. Throw exception is user name or password are empty or password exceeds 8 charactersformat.
+9. Throw exception is user name or password are empty or password exceeds 8 characters format.
+10. add Age private field and public property , throw exception if age is smaller than 1 and bigger than 120.
 
 - avoid code repitition
