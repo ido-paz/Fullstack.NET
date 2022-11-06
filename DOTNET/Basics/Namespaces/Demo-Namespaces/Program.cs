@@ -1,14 +1,16 @@
-﻿using N2;
-namespace N0
+﻿using Vehical;
+using Food;
+class Program
 {
-    class Program
+    public static void Main()
     {
-        public static void Main(){
-            System.Console.WriteLine("Main started");
-
-            N1.C c1 = new N1.C();
-            N2.E e1 = new N2.E();
-            E e2 =new E();
-        }
+        Vehical.Motorcycle m1 = new Vehical.Motorcycle();
+        Vehical.Car c1 = new Vehical.Car();
+        var c2 = new Vehical.Car();
+        m1.Start();
+        c1.Start();
+        c2.Start();
     }
+
 }
+
