@@ -17,6 +17,6 @@ class Program
     static void PrintPower(Power power)
     {
         if (power == Power.On) System.Console.WriteLine("Power is On = " + (int)power);
-        else if (power == Power.Off) System.Console.WriteLine("Power is Off = " + (int)power);
+        else if (power == Power.Off) System.Console.WriteLine("Power is " + power.ToString());
     }
 }
