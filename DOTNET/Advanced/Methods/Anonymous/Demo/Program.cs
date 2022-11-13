@@ -9,21 +9,29 @@
         {
             System.Console.WriteLine("Anonymous invoked");
         });
-        D2 d2 = new D2(delegate(int a)
+        D2 d2 = new D2(delegate (int a)
         {
             System.Console.WriteLine("Anonymous invoked " + a);
         });
-        D3 d3 = new D3(delegate(int a)
+        D3 d3 = new D3(delegate (int a)
         {
             System.Console.WriteLine("Anonymous invoked " + a);
             return a;
-        });       
+        });
         // 
         d1();
         d2(2);
-        d3(3);        
+        d3(3);
     }
 
+    static void Moshe()
+    {
+        var d1 = delegate ()
+        {
+            System.Console.WriteLine("Anonymous invoked");
+        };
+        d1();
+    }
     static void F1()
     {
         System.Console.WriteLine("F1 invoked");

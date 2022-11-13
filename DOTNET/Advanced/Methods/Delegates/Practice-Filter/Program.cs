@@ -5,7 +5,7 @@ class Program
     static void Main()
     {
         int[] array = new int[] { 1, 2, 3, 5, 6, 11, 12, 13, 14, 22, 23, 33, 44, 55 };
-        int[] evenArray = GetFiltered(array, IsEven);
+        int[] evenArray = GetFiltered(array, null);
         int[] notEvenArray = GetFiltered(array, IsNotEven);
         int[] has3Array = GetFiltered(array, Has3);
         int[] hasSameNumberArray = GetFiltered(array, HasSameNumberSequance);
