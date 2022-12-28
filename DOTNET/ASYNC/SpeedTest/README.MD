@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿# Urls sync vs async speed comparison report
+=======
+# Urls sync vs async speed comparison report
+>>>>>>> 5206e57ca0ccf0e74a27446d2cb840a0be480e5a
 1. Create an array of several urls 
 2. Create an application that recieves an url and downloads its content and stores the download size and speed.
 3. Use the urls to download their contents and measure the total download speed inside sync method 
@@ -38,4 +42,8 @@ https://ynet.co.il,contains 379851 bytes ,a count 391,took 270 ms
 https://msn.co.il,contains 37922 bytes ,a count 88,took 693 ms
 https://walla.co.il,contains 722530 bytes ,a count 454,took 1742 ms
 Total downloads duration took 1742 ms
+<<<<<<< HEAD
 </pre>
+=======
+</pre>
+>>>>>>> 5206e57ca0ccf0e74a27446d2cb840a0be480e5a
