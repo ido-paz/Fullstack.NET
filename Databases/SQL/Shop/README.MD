@@ -8,5 +8,5 @@
 3. Create a stored procedure that will select all customers with orders that have products.
 4. Create a stored procedure that will select all customers orders with order summery value.
 5. Create a stored procedure that will select all customers orders that do not have products.
-6. Create a stored procedure script that will select the product that been ordered that most.
+6. Create a stored procedure that will select the product that has been ordered that most.
 
