@@ -4,4 +4,6 @@ obj/
 .vscode/
 *.suo
 Presentations.lnk
+*solution*.*
+*solution*/
 
