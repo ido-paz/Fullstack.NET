@@ -11,7 +11,7 @@
 
     private static void Display_Todos_CRUD_UI()
     {
-        TodosDB tdbc = new TodosDB("Data Source=.\\sqlexpress;Initial Catalog=Todos;Integrated Security=True");
+        TodosDB tdbc = new TodosDB("Data Source=.\\sqlexpress;Initial Catalog=Todos;Integrated Security=True;TrustServerCertificate=Yes;");
         string selection = null, title, newTitle, isComplete;
         const string MENU = @"Enter your selection:
                 s = show all items
