@@ -16,90 +16,69 @@
         const string MENU = @"Enter your selection:
                 s = show all items
                 c = create item
-                cc = create items 
                 u = update item
                 d = delete item
                 q = quit app";
         while (selection != "q")
         {
-            try
+            Console.Clear();
+            Console.WriteLine(MENU);
+            selection = Console.ReadLine().Trim().ToLower();
+            if (selection == "s")
             {
-                Console.Clear();
-                Console.WriteLine(MENU);
-                selection = Console.ReadLine().Trim().ToLower();
-                if (selection == "s")
-                {
-                    Console.WriteLine("Showing all items");
-                    foreach (var item in tdbc.GetAllItems())
-                        Console.WriteLine(item);
-                }
-                else if (selection == "c")
-                {
-                    Console.WriteLine("Enter title and press enter");
-                    title = Console.ReadLine().Trim();
-                    Console.WriteLine("Enter isComplete (false | true) and press enter");
-                    isComplete = Console.ReadLine().Trim().ToLower();
-                    //
-                    tdbc.InsertItem(new Item() { Title = title, IsCompleted = bool.Parse(isComplete) });
+                Console.WriteLine("Showing all items");
+                foreach (var item in tdbc.GetAllItems())
+                    Console.WriteLine(item);
+            }
+            else if (selection == "c")
+            {
+                Console.WriteLine("Enter title and press enter");
+                title = Console.ReadLine().Trim();
+                Console.WriteLine("Enter isComplete (false | true) and press enter");
+                isComplete = Console.ReadLine().Trim().ToLower();
+                //
+                tdbc.InsertItem(new Item() { Title = title, IsCompleted = bool.Parse(isComplete) });
 
-                }
-                else if (selection == "cc")
+            }
+            else if (selection == "u")
+            {
+                Console.WriteLine("Enter old title and press enter");
+                title = Console.ReadLine().Trim();
+                Console.WriteLine("Enter new title and press enter");
+                newTitle = Console.ReadLine().Trim();
+                Console.WriteLine("Enter new isComplete (false | true) and press enter");
+                isComplete = Console.ReadLine().Trim().ToLower();
+                //
+                Item item = tdbc.GetItem(title);
+                if (item != null)
                 {
-                    Console.WriteLine("Enter CSV title (for example: title1,title2,title3) and press enter");
-                    string[] titles = Console.ReadLine().Trim().Split(',');
-                    List<Item> items = new List<Item>();
-                    foreach (string t in titles)
-                        items.Add(new Item() { Title = t });
-                    //
-                    tdbc.InsertItems(items);
+                    item.Title = newTitle;
+                    item.IsCompleted = bool.Parse(isComplete);
+                    tdbc.UpdateItem(item);
                 }
-                else if (selection == "u")
+                else
+                    Console.WriteLine($"Task with title '{title}' was not found");
+            }
+            else if (selection == "d")
+            {
+                Console.WriteLine("Enter title and press enter");
+                title = Console.ReadLine().Trim();
+                //
+                Item item = tdbc.GetItem(title);
+                if (item != null)
                 {
-                    Console.WriteLine("Enter old title and press enter");
-                    title = Console.ReadLine().Trim();
-                    Console.WriteLine("Enter new title and press enter");
-                    newTitle = Console.ReadLine().Trim();
-                    Console.WriteLine("Enter new isComplete (false | true) and press enter");
-                    isComplete = Console.ReadLine().Trim().ToLower();
-                    //
-                    Item item = tdbc.GetItem(title);
-                    if (item != null)
-                    {
-                        item.Title = newTitle;
-                        item.IsCompleted = bool.Parse(isComplete);
-                        tdbc.UpdateItem(item);
-                    }
-                    else
-                        Console.WriteLine($"Task with title '{title}' was not found");
+                    tdbc.DeleteItem(item);
                 }
-                else if (selection == "d")
-                {
-                    Console.WriteLine("Enter title and press enter");
-                    title = Console.ReadLine().Trim();
-                    //
-                    Item item = tdbc.GetItem(title);
-                    if (item != null)
-                    {
-                        tdbc.DeleteItem(item);
-                    }
-                    else
-                        Console.WriteLine($"Task with title '{title}' was not found");
+                else
+                    Console.WriteLine($"Task with title '{title}' was not found");
 
-                }
-                else if (selection != "q")
-                {
-                    Console.WriteLine("Invalid selection");
-                }
             }
-            catch (Exception e)
+            else if (selection != "q")
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine("Invalid selection");
             }
-            finally
-            {
-                Console.WriteLine("Press any key to show the selection menu");
-                Console.ReadLine();
-            }
+            Console.WriteLine("Press any key to show the selection menu");
+            Console.ReadLine();
         }
     }
 }
