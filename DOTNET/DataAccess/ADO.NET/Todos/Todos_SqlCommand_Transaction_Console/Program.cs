@@ -16,6 +16,7 @@
         const string MENU = @"Enter your selection:
                 s = show all items
                 c = create item
+                cc = create items (in CSV format)
                 u = update item
                 d = delete item
                 q = quit app";
@@ -38,6 +39,17 @@
                 isComplete = Console.ReadLine().Trim().ToLower();
                 //
                 tdbc.InsertItem(new Item() { Title = title, IsCompleted = bool.Parse(isComplete) });
+
+            }
+            else if (selection == "cc")
+            {
+                Console.WriteLine("Enter titles in CSV format and press enter");
+                string[] titles = Console.ReadLine().Trim().Split(',');
+                List<Item> items = new List<Item>();
+                foreach (var t in titles)
+                    items.Add(new Item() { Title = t });
+                //
+                tdbc.InsertItems(items);
 
             }
             else if (selection == "u")
