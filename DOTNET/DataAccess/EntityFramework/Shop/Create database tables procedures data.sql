@@ -30,8 +30,8 @@ go
 create proc DeleteProductByName @name int as delete Products where name=@name ;return @@rowcount
 go
 --insert sample data
-insert into Products values('Buy bread',0)
-insert into Products values('Visit family',0)
-insert into Products values('Sell car',1)
-insert into Products values('Make resume',0)
-insert into Products values('Learn HTML',1)
+insert into Products values('Bread',12)
+insert into Products values('Bamba',5)
+insert into Products values('Tomato',1)
+insert into Products values('Oat Milk',12)
+insert into Products values('Pita',1)
