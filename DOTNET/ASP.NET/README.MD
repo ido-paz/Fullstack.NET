@@ -33,4 +33,9 @@ To add custom middleware , add a class , receive "RequestDelegate" parameter typ
  
 https://learn.microsoft.com/en-us/aspnet/core/fundamentals/Routing?view=aspnetcore-6.0
 
+4. API controller - class that contains HTTP requests handlers for CRUD operations that can return data.
+https://www.tutorialsteacher.com/webapi/web-api-controller
+
+ 
+
 
