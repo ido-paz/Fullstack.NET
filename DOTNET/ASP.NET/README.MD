@@ -34,8 +34,27 @@ To add custom middleware , add a class , receive "RequestDelegate" parameter typ
 https://learn.microsoft.com/en-us/aspnet/core/fundamentals/Routing?view=aspnetcore-6.0
 
 4. API controller - class that contains HTTP requests handlers for CRUD operations that can return data.
-https://www.tutorialsteacher.com/webapi/web-api-controller
 
+https://www.tutorialsteacher.com/webapi/web-api-controller
  
+5. Model binding - mapping the data received from the request to method handlers parameters.
+* a. Get, Delete - will bind automatically from the route, if receiving from other ways like query string we need to explicitly mention [FromQuery]
+* b. Post, Put - will bind automatically from request body, if receiving from other ways like form we need to explicitly mention [FromForm]
+* When uploading file prefer using form due to performance and simplicity
+Model Binding in ASP.NET Core | Microsoft Docs
+6. Model validation - we should never trust the data that received from the client (due to security, integrity reasons), for these reasons we should validate the data.
+* a. by default validation happens due to validation filter (that is enabled by adding ApiController to the class) that processing data annotation that was defined on the model.
+* b. to suppress default model validation filter and do manual validation using ModelState class, add in conifgureServices: 
+services.Configure<ApiBehaviorOptions>(options => {	options.SuppressModelStateInvalidFilter = true;});
+
+https://docs.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-6.0
+
+7. Action Return Type - 
+* a. ActionResult is a base class that wraps any data that returns to the client ,the default ActionResult is a JSON result .
+* b. if we want to return a file use FileContentResult
+* c. when using ActionResult or FileContentResult we can control the httpStatusCode when returning data to the client. 
+https://restfulapi.net/http-status-codes/
+
+
 
 
