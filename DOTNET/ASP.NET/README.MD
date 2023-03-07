@@ -55,6 +55,22 @@ https://docs.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetco
 * c. when using ActionResult or FileContentResult we can control the httpStatusCode when returning data to the client. 
 https://restfulapi.net/http-status-codes/
 
+8. Controller filters - In Startup.Configure in the AddController middleware add the Logic that runs before and after every controller action  methods , available filters:
+* a. result - executes only after controller method handler
+* b. action - Inherit  IAsyncActionFilter
+* c. exception - Inherit  IExceptionFilter , to return a result use httpContext.Result 
+* d. service
+
+https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/filters
+
+9. App service - A reusable component that provides app functionality. Services are registered in ConfigureServices and consumed across the app via dependency injection (DI) or ApplicationServices.
+
+10. Dependency injection - Software design pattern that is in use in ASP.NET CORE, that enable receiving an instance of a preconfigured class in a depended class constructor or function, the pre-configuration in the ConfigureServices method , enables control of the type, lifetime of the provided instance that can be:
+* a. Transient - creates a new instance of the service, every time you request it.  
+* b. Scoped: creates a new instance for every scope. (Each request is a Scope). Within the scope, it reuses the existing service.
+* c. Singleton: Creates a new Service only once during the application lifetime and uses it everywhere.
+
+https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-6.0
 
 
 
