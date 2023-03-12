@@ -15,51 +15,26 @@ public class ProductsController : ControllerBase
         };
 
     [HttpGet]
-    public ActionResult<List<Product>> GetAll()
+    public List<Product> GetAll()
     {
-        Console.WriteLine("Get all");
-
-        return Ok(Products);
+        return Products;
     }
 
     [HttpGet("{id}")]
-    public ActionResult<Product> Get(int id)
+    public Product Get(int id)
     {
-        Console.WriteLine("Get by Id");
-        return Ok(Products.FirstOrDefault(p => p.Id == id));
+        return Products.FirstOrDefault(p => p.Id == id);
     }
 
     [HttpPost]
-    public ActionResult Add(Product newProduct)
+    public string Add(Product newProduct)
     {
-        Console.WriteLine("Add");
         //if (newProduct.Id < 1)
         //    throw new ArgumentException("id must be above 0");
         //if (newProduct.Price < 1)
         //    throw new ArgumentException("Price must be above 0");
-        return Created("Products/" + newProduct.Id, "Add->" + newProduct.ToString());
+        return "Add->" + newProduct.ToString();
     }
-
-    [HttpDelete("{id}")]
-    public ActionResult Delete(int id) 
-    {
-        Console.WriteLine("Delete");
-        if (Products.Exists(p => p.Id == id))
-            return NoContent();
-        else
-            return NotFound();
-    }
-
-    [HttpPut("{id}")]
-    public ActionResult Update(int id)
-    {
-        Console.WriteLine("Update");
-        if (Products.Exists(p => p.Id == id))
-            return NoContent();
-        else
-            return NotFound();
-    }
-
 
     [HttpPost("Add2")]
     public string Add2([FromBody]Product newProduct)

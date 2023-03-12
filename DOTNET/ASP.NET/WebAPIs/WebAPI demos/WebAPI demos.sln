@@ -3,13 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controllers", "Controllers\Controllers.csproj", "{F82A2C38-0335-4510-901D-051BBF6D90A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Controllers", "Controllers\Controllers.csproj", "{F82A2C38-0335-4510-901D-051BBF6D90A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelBinding", "ModelBinding\ModelBinding.csproj", "{96E600AD-5F74-4582-AE19-BF3F9731B674}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelBinding", "ModelBinding\ModelBinding.csproj", "{96E600AD-5F74-4582-AE19-BF3F9731B674}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelValidation", "ModelValidation\ModelValidation.csproj", "{4F8A2986-8B7A-4BCA-96BE-671A6CA1115B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelValidation", "ModelValidation\ModelValidation.csproj", "{4F8A2986-8B7A-4BCA-96BE-671A6CA1115B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActionReturnTypes", "ActionReturnTypes\ActionReturnTypes.csproj", "{BA58A1C4-DD02-4824-A4BC-88AF32BC40B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActionReturnTypes", "ActionReturnTypes\ActionReturnTypes.csproj", "{BA58A1C4-DD02-4824-A4BC-88AF32BC40B6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Middlewares", "Middlewares\Middlewares.csproj", "{3D150FDB-FAC1-4DAD-8AEC-ACE09170CF0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Filters", "Filters\Filters.csproj", "{A40E919C-F24B-4120-8F8B-546F00005443}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services_DI", "Services_DI\Services_DI.csproj", "{766E5500-7F39-4557-88DC-571E5927EA6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enviroment_Configuration", "Enviroment_Configuration\Enviroment_Configuration.csproj", "{526AA2EF-C3D1-456E-A3A5-23299D134D11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +41,22 @@ Global
 		{BA58A1C4-DD02-4824-A4BC-88AF32BC40B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA58A1C4-DD02-4824-A4BC-88AF32BC40B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA58A1C4-DD02-4824-A4BC-88AF32BC40B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D150FDB-FAC1-4DAD-8AEC-ACE09170CF0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D150FDB-FAC1-4DAD-8AEC-ACE09170CF0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D150FDB-FAC1-4DAD-8AEC-ACE09170CF0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D150FDB-FAC1-4DAD-8AEC-ACE09170CF0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A40E919C-F24B-4120-8F8B-546F00005443}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A40E919C-F24B-4120-8F8B-546F00005443}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A40E919C-F24B-4120-8F8B-546F00005443}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A40E919C-F24B-4120-8F8B-546F00005443}.Release|Any CPU.Build.0 = Release|Any CPU
+		{766E5500-7F39-4557-88DC-571E5927EA6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{766E5500-7F39-4557-88DC-571E5927EA6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{766E5500-7F39-4557-88DC-571E5927EA6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{766E5500-7F39-4557-88DC-571E5927EA6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{526AA2EF-C3D1-456E-A3A5-23299D134D11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{526AA2EF-C3D1-456E-A3A5-23299D134D11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{526AA2EF-C3D1-456E-A3A5-23299D134D11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{526AA2EF-C3D1-456E-A3A5-23299D134D11}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
