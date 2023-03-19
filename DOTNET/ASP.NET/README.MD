@@ -72,5 +72,19 @@ https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/filters
 
 https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-6.0
 
+11. Configuration - ASP.NET Core provides a configuration framework that gets settings as name-value pairs from an ordered set of configuration providers. You can read threw [Web Application Instance].Configuration , GetConnectionString for reading "ConnectionString" key.
+Built-in configuration providers are available for a variety of sources, such as .json files (default), .xml files, environment variables, and command-line arguments. 
+The default host builder will bind the appsettings to Configuration class static instance, to use it in any class , inject it in the class constructor , using service.Configure adds the class as a singleton instance.
+
+12. Environments - Execution environments are set from the files that exists in root folder with name appsetting.[enviromentName].json ,the specific settings overrides the default. there are 3 default environments:
+	* a. Development - environment for the developers , designers.
+    * b. Staging - a nearly exact replica of a production environment for software testing and quality assurance (QA) team.
+	* c. Production - environment for the clients.
+
+13. Logging – add logger service threw AddLogging  , configure it , Inject ILogger in the desired class constructor to use it.
+
+14. API documentation – enables viewing the Web API controllers action methods, request & response data structures, Swagger - OpenAPI provides documentation / testing interface  , enables  generating client code  . You can enable it in most of the Web API templates when creating new project , or when after installing Swashbuckle.AspNetCore package and configuring it according its GitHub documentation.
+https://swagger.io/ , https://github.com/RicoSuter/NSwag/wiki/NSwagStudio
+
 
 
