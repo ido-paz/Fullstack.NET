@@ -1,0 +1,42 @@
+﻿@page
+@model Products_RazorPages.Pages.ProductsModel
+@{
+    ViewData["Title"] = "Products list";       
+}
+
+<a asp-page="/CreateProduct">Create new product</a>
+
+<hr />
+<h2>Products list:</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Id
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Products)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Price</td>
+            <td>Delete | Edit</td>
+        </tr>
+    }
+
+</table>
+
+
+
+Page updated at: @DateTime.Now | Created by: @(Model.Firstname + " " + Model.Lastname)
