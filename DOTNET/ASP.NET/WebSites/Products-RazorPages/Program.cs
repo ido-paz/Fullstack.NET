@@ -1,3 +1,5 @@
+using Products_RazorPages.Models;
+
 namespace Products_RazorPages
 {
     public class Program
@@ -8,7 +10,8 @@ namespace Products_RazorPages
 
             // Add services to the container.
             builder.Services.AddRazorPages();
-
+            builder.Services.AddDbContext<ShopContext>();
+            
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

@@ -1,17 +1,15 @@
 ﻿@page
-@model Products_RazorPages.Pages.CreateProductModel
+@model Products_RazorPages.Pages.Products.CreateModel
 @{
     ViewData["Title"] = "Create product";
 }
 
 <h1>Create product</h1>
+
 <hr />
 
 <form method="post">
-    <div class="form-group">
-        <label>Id</label>
-        <input type="number" name="id" class="form-control"/>
-    </div>
+   
     <div class="form-group">
         <label>Name</label>
         <input type="text" name="name" class="form-control" />
