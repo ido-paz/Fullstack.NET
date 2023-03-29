@@ -1,4 +1,5 @@
 using Products_MVC.Models;
+using Shop_MVC.Models;
 
 namespace Products_MVC
 {
@@ -10,6 +11,7 @@ namespace Products_MVC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<ShopContext>();
 
             var app = builder.Build();
 

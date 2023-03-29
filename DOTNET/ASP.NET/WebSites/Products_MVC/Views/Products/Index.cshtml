@@ -1,0 +1,51 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<Shop_MVC.Models.Product>
+@{
+    ViewData["Title"] = "Product list";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<hr />
+
+<a href="/products/create">Create product</a>
+
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Price</td>
+            <td>
+                <a href="/products/edit/@item.Id">Edit</a> |
+                <a href="/products/delete/@item.Id">Delete</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<button onclick="getTime()">Get server time</button>
+<div id="time"></div>
+
+
+@section Scripts
+{
+    <script>
+        function getTime(){
+            fetch('/products/GetServerTime').then(res=>res.text())
+                                            .then(text=> document.getElementById("time").innerText = text);
+        }
+        //alert("Hi from index");
+    </script>
+}

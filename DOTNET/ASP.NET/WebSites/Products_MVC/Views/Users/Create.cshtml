@@ -1,0 +1,38 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Shop_MVC.Models.User
+@{
+    ViewData["Title"] = "Create user";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<hr />
+
+<form method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="UserName"></label>
+        <input asp-for="UserName" class="form-control" />
+        <span asp-validation-for="UserName" class="text-alert"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PhoneNumber"></label>
+        <input asp-for="PhoneNumber" class="form-control" />
+        <span asp-validation-for="PhoneNumber" class="text-alert"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Save💾" class="btn btn-primary" />
+    </div>
+</form>
+
+<a href="/products/index">back to user list</a>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
