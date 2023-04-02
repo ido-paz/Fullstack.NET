@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Shop_MVC.Models;
 
 namespace Shop_MVC.Controllers
@@ -24,9 +25,23 @@ namespace Shop_MVC.Controllers
         [HttpPost]
         public IActionResult Create(Product newProduct)
         {
-            _shopContext.Products.Add(newProduct);
-            _shopContext.SaveChanges();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                _shopContext.Products.Add(newProduct);
+                _shopContext.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                //var errors = from e in ModelState.AsEnumerable()
+                //             where e.Value.ValidationState == ModelValidationState.Invalid
+                //             select e.Key + " is invalid";
+                var errors = ModelState.AsEnumerable().
+                                        Where(m => m.Value.ValidationState == ModelValidationState.Invalid).
+                                        Select(m=> m.Key+ " is invalid"); 
+                ViewData["Errors"] = errors;
+                return View();
+            }
         }
 
         public IActionResult Edit(int id)

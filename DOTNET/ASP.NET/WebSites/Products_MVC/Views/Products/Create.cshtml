@@ -1,8 +1,10 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@model Shop_MVC.Models.Product;
 @{
     ViewData["Title"] = "Create product";
+    IEnumerable<string>? errors = ViewData["Errors"] as IEnumerable<string>;
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -10,14 +12,27 @@
 <hr />
 
 <form method="post">
+    @if (errors != null && errors.Count() > 0)
+    {
+        <ul class="text-danger">
+            @foreach (var error in errors)
+            {
+                <li>@error</li>
+            }
+        </ul>
+    }
+
+    <div asp-validation-summary="ModelOnly"></div>
     <div class="form-group">
-        <label >Name</label>
-        <input type="text" name="name" class="form-control"/>
+        <label asp-for="Name"></label>
+        <input type="text" asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label>Price</label>
-        <input type="number" name="price" class="form-control" />
+        <label asp-for="Price"></label>
+        <input type="number" asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
     </div>
 
     <div class="form-group">
@@ -26,3 +41,10 @@
 </form>
 
 <a href="/products/index">back to product list</a>
+
+@section Scripts
+{
+    @{
+        Html.RenderPartial("_ValidationScriptsPartial.cshtml");
+    }
+}
