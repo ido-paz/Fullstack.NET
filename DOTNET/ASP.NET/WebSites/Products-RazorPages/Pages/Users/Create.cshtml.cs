@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Products_RazorPages.Models;
+using Shop_RazorPages.Models;
 
-namespace Products_RazorPages.Pages.Users
+namespace Shop_RazorPages.Pages.Users
 {
     public class CreateModel : PageModel
     {
-        private readonly Products_RazorPages.Models.ShopContext _context;
+        private readonly Shop_RazorPages.Models.ShopContext _context;
 
-        public CreateModel(Products_RazorPages.Models.ShopContext context)
+        public CreateModel(Shop_RazorPages.Models.ShopContext context)
         {
             _context = context;
         }

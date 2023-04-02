@@ -1,6 +1,6 @@
-using Products_RazorPages.Models;
+using Shop_RazorPages.Models;
 
-namespace Products_RazorPages
+namespace Shop_RazorPages
 {
     public class Program
     {

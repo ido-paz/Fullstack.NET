@@ -1,7 +1,7 @@
-using Products_MVC.Models;
+using Shop_MVC.Models;
 using Shop_MVC.Models;
 
-namespace Products_MVC
+namespace Shop_MVC
 {
     public class Program
     {

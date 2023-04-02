@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Products_RazorPages.Models;
+namespace Shop_RazorPages.Models;
 
 public partial class Product
 {

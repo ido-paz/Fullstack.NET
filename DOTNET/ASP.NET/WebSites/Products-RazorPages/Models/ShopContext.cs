@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace Products_RazorPages.Models;
+namespace Shop_RazorPages.Models;
 
 public partial class ShopContext : DbContext
 {

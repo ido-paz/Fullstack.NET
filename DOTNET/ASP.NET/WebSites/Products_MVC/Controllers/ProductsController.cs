@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shop_MVC.Models;
 
-namespace Products_MVC.Controllers
+namespace Shop_MVC.Controllers
 {
     public class ProductsController : Controller
     {

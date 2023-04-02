@@ -6,15 +6,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Products_RazorPages.Models;
+using Shop_RazorPages.Models;
 
-namespace Products_RazorPages.Pages.Users
+namespace Shop_RazorPages.Pages.Users
 {
     public class EditModel : PageModel
     {
-        private readonly Products_RazorPages.Models.ShopContext _context;
+        private readonly Shop_RazorPages.Models.ShopContext _context;
 
-        public EditModel(Products_RazorPages.Models.ShopContext context)
+        public EditModel(Shop_RazorPages.Models.ShopContext context)
         {
             _context = context;
         }
