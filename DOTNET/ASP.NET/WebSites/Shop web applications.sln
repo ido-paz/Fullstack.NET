@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop_RazorPages", "Products
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop_MVC", "Products_MVC\Shop_MVC.csproj", "{973903AA-59FB-4389-931D-A3457EF6425F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop_WebAPI_React", "Shop_WebAPI_React\Shop_WebAPI_React.csproj", "{D9DA4289-B6D9-4048-99E0-75073C7E33B4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{973903AA-59FB-4389-931D-A3457EF6425F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{973903AA-59FB-4389-931D-A3457EF6425F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{973903AA-59FB-4389-931D-A3457EF6425F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9DA4289-B6D9-4048-99E0-75073C7E33B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9DA4289-B6D9-4048-99E0-75073C7E33B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9DA4289-B6D9-4048-99E0-75073C7E33B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9DA4289-B6D9-4048-99E0-75073C7E33B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
