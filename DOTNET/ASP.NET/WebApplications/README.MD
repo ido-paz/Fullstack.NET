@@ -1,10 +1,3 @@
-# CORS - Cross-Origin Resource Sharing
-* Cross-Origin Resource Sharing (CORS) is an HTTP-header based mechanism that allows a server to indicate any origins (domain, scheme, or port) other than its own from which a browser should permit loading resources. CORS also relies on a mechanism by which browsers make a "preflight" request to the server hosting the cross-origin resource, in order to check that the server will permit the actual request. In that preflight, the browser sends headers that indicate the HTTP method and headers that will be used in the actual request.
-
-https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
-
-https://www.youtube.com/watch?v=4KHiSt0oLJ0
-
 # Web application | web app
 Is application software that is accessed using a web browser. Web applications are delivered on the World Wide Web to users with an active network connection
 
