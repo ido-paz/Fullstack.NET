@@ -4,7 +4,7 @@
     {
         static async Task Main(string[] args)
         {
-            string url = "https://localhost:7170";
+            string url = "https://localhost:6666";
             //var hc = new HttpClient();
             //var wf = await hc.GetStringAsync(url + "/WeatherForecast");
             Client shopClient = new Client(url,new HttpClient());
