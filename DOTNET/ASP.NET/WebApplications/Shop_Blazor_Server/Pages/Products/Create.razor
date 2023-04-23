@@ -1,0 +1,43 @@
+﻿@page "/products/create"
+
+@using Shop_Blazor_Server.Models; 
+@inject Shop_Blazor_Server.Models.ShopContext SC;
+@inject NavigationManager NM;
+
+<PageTitle>Create new product</PageTitle>
+
+<h1>Create new product</h1>
+
+<form>
+    <div class="form-group">
+        <label class="form-label" >Name</label>
+        <input type="text" class="form-control" @bind="Name" />
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Price</label>
+        <input type="number" class="form-control" @bind="Price" />
+    </div>
+
+    <div class="form-group">
+        <button @onclick="Save"  class="btn btn-primary">Save</button>
+    </div>
+
+</form>
+
+
+<NavLink href="/products">Back to product list</NavLink>
+
+@code {
+
+    public string Name{ get; set; }
+    public decimal Price { get; set; }
+
+    void Save()
+    {
+        var p = new Product(){Name=Name,Price=Price};
+        SC.Products.Add(p);
+        SC.SaveChanges();
+        NM.NavigateTo("/products",true);
+    }
+}

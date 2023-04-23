@@ -1,61 +1,65 @@
 ﻿@page "/products"
 
-@using Shop_Blazor_Server.Models
-@inject ShopContext SC
+@using Shop_Blazor_Server.Models;
+@inject Shop_Blazor_Server.Models.ShopContext SC
 
-<PageTitle>Product list</PageTitle>
+<PageTitle>Products list</PageTitle>
 
-<h1>Product list</h1>   
+<h1>Products list</h1>
 
+<a href="/products/create">Create new product</a>
 
-@if (Products == null || Products.Count() == 0)
+<hr/>
+
+@if (Products == null && Products.Count()==0)
 {
-    <div>No Products</div>
+    <div>No products</div>
 }
 else
 {
-    <table class="table" style="color:red">
+    <table class="table">
         <thead>
             <tr>
-                <th>
-                    Id
-                </th>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Price
-                </th>
-                <th>
-                    Actions
-                </th>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Action</th>
             </tr>
         </thead>
-
         <tbody>
-            @foreach (var p in Products)
+            @foreach (Product p in Products)
             {
                 <tr>
                     <td>@p.Id</td>
                     <td>@p.Name</td>
                     <td>@p.Price</td>
                     <td>
-                        <a>Edit</a>
-                        <button class="btn btn-primary">Delete</button>
+                        <a href="/products/edit/@p.Id">Edit</a> |
+                        <button @onclick="()=>Delete(p.Id)" class="btn btn-primary">Delete</button>
+
                     </td>
                 </tr>
             }    
-
         </tbody>
     </table>
 }
 
 
 @code {
-    IEnumerable<Product> Products;
+    public IEnumerable<Product> Products { get; set; }
 
     protected override void OnInitialized()
     {
-        Products = SC.Products.ToList() ;
+        base.OnInitialized();
+        Products = SC.Products.ToList();
     }
+
+    void Delete(int id)
+    {
+        var p = SC.Products.FirstOrDefault(p => p.Id == id);
+        SC.Products.Remove(p);
+        SC.SaveChanges();
+        Products = SC.Products.ToList();
+    }
+
 }

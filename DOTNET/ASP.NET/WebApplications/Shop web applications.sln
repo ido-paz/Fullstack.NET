@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop_MVC", "Products_MVC\Sh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop_WebAPI_React", "Shop_WebAPI_React\Shop_WebAPI_React.csproj", "{D9DA4289-B6D9-4048-99E0-75073C7E33B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop_Blazor_Server", "Shop_Blazor_Server\Shop_Blazor_Server.csproj", "{6445029B-3456-4FE0-AB31-035ADFC89F4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop_Blazor_Server", "Shop_Blazor_Server\Shop_Blazor_Server.csproj", "{6445029B-3456-4FE0-AB31-035ADFC89F4F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

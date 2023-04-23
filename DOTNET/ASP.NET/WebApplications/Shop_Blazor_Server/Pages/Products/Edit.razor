@@ -1,0 +1,54 @@
+﻿@page "/products/edit/{Id:int}"
+
+@using Shop_Blazor_Server.Models; 
+@inject Shop_Blazor_Server.Models.ShopContext SC;
+@inject NavigationManager NM;
+
+<PageTitle>Edit new product</PageTitle>
+
+<h1>Edit new product</h1>
+
+<EditForm Model="Product" OnValidSubmit="Save"> 
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
+    <div class="form-group">
+        <label class="form-label">Name</label>
+        <InputText class="form-control" @bind-Value="Product.Name"></InputText>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Price</label>
+        <InputNumber @bind-Value="Product.Price" class="form-control"></InputNumber>
+    </div>
+
+    <div class="form-group">
+        <button  class="btn btn-primary">Save</button>
+    </div>
+
+</EditForm>
+
+
+<NavLink href="/products">Back to product list</NavLink>
+
+@code {
+
+    [Parameter]
+    public int Id { get; set; }
+
+    public Product Product { get; set; }
+
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Product = SC.Products.FirstOrDefault(p => p.Id == Id);
+    }
+
+    void Save()
+    {
+        //var p = new Product(){Name=Name,Price=Price};
+        SC.Products.Update(Product);
+        SC.SaveChanges();
+        NM.NavigateTo("/products",true);
+    }
+}
