@@ -9,7 +9,7 @@ export class ProductList extends Component {
     }
 
     componentDidMount() {
-        this.populateProductsData();
+        this.fetchProducts();
     }
 
     render() {
@@ -18,7 +18,16 @@ export class ProductList extends Component {
             return (<div>No products</div>);
         //
         let rows = items.map((p, i) => {
-            return (<tr><td>{p.id}</td><td>{p.name}</td><td>{p.price}</td></tr>);
+            let editTo = "/products/edit-product/" + p.id;
+            return (<tr key={p.id}>
+                <td>{p.id}</td>
+                <td>{p.name}</td>
+                <td>{p.price}</td>
+                <td>
+                    <NavLink to={editTo} >Edit</NavLink> |
+                    <button onClick={(e)=>this.delete(p.id)} className="btn btn-primary">Delete</button>
+                </td>
+            </tr>);
         });
 
         return (
@@ -33,6 +42,7 @@ export class ProductList extends Component {
                             <th>Id</th>
                             <th>Name</th>
                             <th>Price</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,7 +54,19 @@ export class ProductList extends Component {
         );
     }
 
-    populateProductsData() {
+    async delete(id) {
+        try {
+            let res = await fetch('products/' + id, { method: 'DELETE' });
+            if (res.ok) {
+                this.fetchProducts();
+            }
+        } catch (e) {
+            alert(e.message);
+        }
+    }
+
+
+    fetchProducts() {
         fetch('products').then(res => res.json()).
             then(json => this.setState({ items: json, loading: false })).
             catch(err => console.error(err));

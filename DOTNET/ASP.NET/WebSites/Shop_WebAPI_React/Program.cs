@@ -11,6 +11,17 @@ namespace Shop_WebAPI_React
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<Models.ShopContext>();
+            builder.Services.AddCors(sa =>
+            {
+                sa.AddDefaultPolicy(pol =>
+                {
+                    pol.AllowAnyHeader();
+                    pol.AllowAnyMethod();
+                    pol.AllowAnyOrigin();
+                    //pol.WithMethods("POST", "PUT", "DELETE", "GET");
+                    //pol.WithOrigins("https://localhost:44474/");
+                });
+            });
 
             var app = builder.Build();
 
@@ -20,7 +31,7 @@ namespace Shop_WebAPI_React
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            app.UseCors();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
