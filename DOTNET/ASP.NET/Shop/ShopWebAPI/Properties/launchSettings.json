@@ -12,9 +12,9 @@
     "ShopWebAPI": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
-      "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:6666",
+      //"launchBrowser": true,
+      //"launchUrl": "swagger",
+      "applicationUrl": "https://localhost:443;https://localhost:6666",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

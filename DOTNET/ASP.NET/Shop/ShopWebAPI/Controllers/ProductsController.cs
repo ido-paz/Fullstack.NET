@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,8 +21,12 @@ namespace ShopWebAPI.Controllers
             _context = context;
         }
 
+        [HttpGet("test")]
+        public string Test() { return "test"; }
+
         // GET: api/Products
         [HttpGet]
+        //[Authorize]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
             if (_context.Products == null)

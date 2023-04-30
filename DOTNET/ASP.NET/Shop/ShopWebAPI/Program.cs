@@ -15,6 +15,16 @@ namespace ShopWebAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            //add cors service
+            builder.Services.AddCors(cfg =>
+            {
+                cfg.AddDefaultPolicy(pol =>
+                {
+                    pol.AllowAnyHeader();
+                    pol.AllowAnyMethod();
+                    pol.AllowAnyOrigin();
+                });
+            });
 
             var app = builder.Build();
 
@@ -24,9 +34,9 @@ namespace ShopWebAPI
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.UseCors();
             app.UseHttpsRedirection();
-
+            //app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers();
