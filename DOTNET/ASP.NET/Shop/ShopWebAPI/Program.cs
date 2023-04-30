@@ -1,4 +1,7 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using ShopWebAPI.Models;
+using System.Text;
 
 namespace ShopWebAPI
 {
@@ -26,6 +29,27 @@ namespace ShopWebAPI
                 });
             });
 
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(o =>
+            {
+                o.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                    ValidAudience = builder.Configuration["Jwt:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey
+                    (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ClockSkew=System.TimeSpan.Zero,
+                    ValidateIssuerSigningKey = true
+                };
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -37,14 +61,16 @@ namespace ShopWebAPI
             app.UseCors();
 
             app.UseHttpsRedirection();
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers();
 
             var port = app.Configuration["Port"];
-            if (port != null) 
+            if (port != null)
                 app.Run($"https://localhost:{port}");
-            else 
+            else
                 app.Run();
         }
     }
