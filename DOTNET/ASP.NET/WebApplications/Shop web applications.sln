@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop_WebAPI_React", "Shop_W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop_Blazor_Server", "Shop_Blazor_Server\Shop_Blazor_Server.csproj", "{6445029B-3456-4FE0-AB31-035ADFC89F4F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop_Blazor_WASM", "Shop_Blazor_WASM\Shop_Blazor_WASM.csproj", "{B6B4B98C-4DAC-49E2-901F-4FF9F40C6D90}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{6445029B-3456-4FE0-AB31-035ADFC89F4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6445029B-3456-4FE0-AB31-035ADFC89F4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6445029B-3456-4FE0-AB31-035ADFC89F4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6B4B98C-4DAC-49E2-901F-4FF9F40C6D90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6B4B98C-4DAC-49E2-901F-4FF9F40C6D90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6B4B98C-4DAC-49E2-901F-4FF9F40C6D90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6B4B98C-4DAC-49E2-901F-4FF9F40C6D90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

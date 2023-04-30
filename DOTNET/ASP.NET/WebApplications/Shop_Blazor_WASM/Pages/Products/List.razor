@@ -1,0 +1,65 @@
+﻿@page "/products"
+
+@using Shop_Blazor_WASM.Models;
+@inject HttpClient HC
+
+<PageTitle>Products list</PageTitle>
+
+<h1>Products list</h1>
+
+<a href="/products/create">Create new product</a>
+
+<hr/>
+
+@if (Products == null || Products.Count()==0)
+{
+    <div>No products</div>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Product p in Products)
+            {
+                <tr>
+                    <td>@p.Id</td>
+                    <td>@p.Name</td>
+                    <td>@p.Price</td>
+                    <td>
+                        <a href="/products/edit/@p.Id">Edit</a> |
+                        <button @onclick="()=>Delete(p.Id)" class="btn btn-primary">Delete</button>
+
+                    </td>
+                </tr>
+            }    
+        </tbody>
+    </table>
+}
+
+
+@code {
+    public IEnumerable<Product>? Products { get; set; } = null;
+
+    const string ProductsURL = "https://localhost/products";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        Products = await HC.GetFromJsonAsync<IEnumerable<Product>>(ProductsURL);
+    }
+    
+    async Task Delete(int id)
+    {
+        await HC.DeleteAsync($"{ProductsURL}/{id}");
+        Products = await HC.GetFromJsonAsync<IEnumerable<Product>>(ProductsURL);
+    }
+
+}

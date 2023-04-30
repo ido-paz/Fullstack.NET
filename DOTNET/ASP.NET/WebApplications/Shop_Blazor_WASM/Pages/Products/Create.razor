@@ -1,0 +1,43 @@
+﻿@page "/products/create"
+
+@using Shop_Blazor_WASM.Models;
+@inject HttpClient HC;
+@inject NavigationManager NM;
+
+<PageTitle>Create new product</PageTitle>
+
+<h1>Create new product</h1>
+
+<EditForm Model="Product2Create" OnValidSubmit="Save2DB">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
+    <div class="form-group">
+        <label class="form-label">Name</label>
+        <InputText class="form-control" @bind-Value="Product2Create.Name"></InputText>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Price</label>
+        <InputNumber @bind-Value="Product2Create.Price" class="form-control"></InputNumber>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary">Save</button>
+    </div>
+
+</EditForm>
+
+
+<NavLink href="/products">Back to product list</NavLink>
+
+@code {
+
+    public Product? Product2Create { get; set; } = new Product();
+
+    void Save2DB()
+    {
+        //SC.Products.Add(Product2Create);
+        //SC.SaveChanges();
+        //NM.NavigateTo("/products",true);
+    }
+}
