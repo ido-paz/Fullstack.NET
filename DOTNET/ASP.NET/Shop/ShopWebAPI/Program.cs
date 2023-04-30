@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using ShopWebAPI.Models;
+using ShopDAL;
 using System.Text;
 
 namespace ShopWebAPI
@@ -10,9 +11,9 @@ namespace ShopWebAPI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            var shopCS = builder.Configuration.GetConnectionString("Shop");
             // Add services to the container.
-            builder.Services.AddDbContext<ShopDbContext>();
+            builder.Services.AddDbContext<ShopDbContext>(cfg => cfg.UseSqlServer(shopCS));
             builder.Services.AddLogging(configure => configure.AddConsole());
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

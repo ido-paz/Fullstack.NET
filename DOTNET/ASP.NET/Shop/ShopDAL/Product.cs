@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ShopWebAPI.Models;
+namespace ShopDAL;
 
 public partial class Product
 {
