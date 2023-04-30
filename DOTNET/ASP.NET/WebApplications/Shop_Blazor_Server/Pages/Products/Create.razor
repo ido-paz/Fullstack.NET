@@ -8,35 +8,35 @@
 
 <h1>Create new product</h1>
 
-<form>
+<EditForm Model="Product2Create" OnValidSubmit="Save2DB">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
     <div class="form-group">
-        <label class="form-label" >Name</label>
-        <input type="text" class="form-control" @bind="Name" />
+        <label class="form-label">Name</label>
+        <InputText class="form-control" @bind-Value="Product2Create.Name"></InputText>
     </div>
 
     <div class="form-group">
         <label class="form-label">Price</label>
-        <input type="number" class="form-control" @bind="Price" />
+        <InputNumber @bind-Value="Product2Create.Price" class="form-control"></InputNumber>
     </div>
 
     <div class="form-group">
-        <button @onclick="Save"  class="btn btn-primary">Save</button>
+        <button class="btn btn-primary">Save</button>
     </div>
 
-</form>
+</EditForm>
 
 
 <NavLink href="/products">Back to product list</NavLink>
 
 @code {
 
-    public string Name{ get; set; }
-    public decimal Price { get; set; }
+    public Product? Product2Create { get; set; } = new Product();
 
-    void Save()
+    void Save2DB()
     {
-        var p = new Product(){Name=Name,Price=Price};
-        SC.Products.Add(p);
+        SC.Products.Add(Product2Create);
         SC.SaveChanges();
         NM.NavigateTo("/products",true);
     }

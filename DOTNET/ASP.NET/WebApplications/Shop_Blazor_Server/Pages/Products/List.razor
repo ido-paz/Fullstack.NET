@@ -11,7 +11,7 @@
 
 <hr/>
 
-@if (Products == null && Products.Count()==0)
+@if (Products == null || Products.Count()==0)
 {
     <div>No products</div>
 }
@@ -46,7 +46,7 @@ else
 
 
 @code {
-    public IEnumerable<Product> Products { get; set; }
+    public IEnumerable<Product>? Products { get; set; }
 
     protected override void OnInitialized()
     {
