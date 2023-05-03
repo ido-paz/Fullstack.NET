@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Shop_Blazor_Server.Models;
+namespace ShopDAL;
 
 public partial class Product
 {

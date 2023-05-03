@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Shop_Blazor_Server.Models;
+namespace ShopDAL;
 
 public partial class User
 {
