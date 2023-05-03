@@ -52,3 +52,10 @@ https://docs.microsoft.com/en-us/dotnet/standard/assembly/
 14. Reflection, Attributes - Prodvide meta data to describe assemblies, modules, and types.
 
 https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/reflection
+
+15. Hashing -
+פונקציית גִּבּוּב (באנגלית: Hash function; לעיתים פונקציית ערבול, פונקציית תמצות ואף פונקציית טחינה) היא פונקציה שממירה קלט חופשי באורך משתנה לפלט באורך קבוע, בדרך כלל קצר בהרבה. לא רצוי שפונקציית גיבוב תיתן פלט זהה לקלטים שונים, אך בלתי נמנע שהדבר יקרה לפעמים, ולכן פונקציות גיבוב נמדדות בהסתברות להפקת פלט זהה. לפונקציות גיבוב יש שימושים בבעיות אלגוריתמיות רבות, ובהן מיון וחיפוש בטקסטים ארוכים ובהצפנה.
+
+https://he.wikipedia.org/wiki/%D7%A4%D7%95%D7%A0%D7%A7%D7%A6%D7%99%D7%99%D7%AA_%D7%92%D7%99%D7%91%D7%95%D7%91
+
+https://stackoverflow.com/questions/4181198/how-to-hash-a-password/10402129#10402129
