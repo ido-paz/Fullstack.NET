@@ -4,9 +4,9 @@
 @inject HttpClient HC;
 @inject NavigationManager NM;
 
-<PageTitle>Edit new product</PageTitle>
+<PageTitle>Edit product</PageTitle>
 
-<h1>Edit new product</h1>
+<h1>Edit product</h1>
 
 <EditForm Model="Product2Update" OnValidSubmit="Save2DB"> 
     <DataAnnotationsValidator></DataAnnotationsValidator>
@@ -37,17 +37,16 @@
 
     public Product? Product2Update { get; set; } = new Product();
 
+    const string ProductsURL = "https://localhost/products";
 
-    //protected override void OnInitialized()
-    //{
-    //    base.OnInitialized();
-    //    Product2Update = SC.Products.FirstOrDefault(p => p.Id == Id);
-    //}
-
-    void Save2DB()
+    protected override async Task OnInitializedAsync()
     {
-        //SC.Products.Update(Product2Update);
-        //SC.SaveChanges();
-        //NM.NavigateTo("/products",true);
+        Product2Update = await HC.GetFromJsonAsync<Product>(ProductsURL + "/" + Id);
+    }
+
+    async Task Save2DB()
+    {
+        await HC.PutAsJsonAsync(ProductsURL, Product2Update);
+        NM.NavigateTo("/products");
     }
 }

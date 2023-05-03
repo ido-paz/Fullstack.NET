@@ -34,10 +34,11 @@
 
     public Product? Product2Create { get; set; } = new Product();
 
-    void Save2DB()
+    const string ProductsURL = "https://localhost/products";
+
+    async Task Save2DB()
     {
-        //SC.Products.Add(Product2Create);
-        //SC.SaveChanges();
-        //NM.NavigateTo("/products",true);
+        await HC.PostAsJsonAsync(ProductsURL, Product2Create);
+        NM.NavigateTo("/products");
     }
 }
