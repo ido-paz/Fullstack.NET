@@ -40,6 +40,13 @@ public partial class ShopContext : DbContext
                 .IsUnicode(false);
         });
 
+        modelBuilder.Entity<User>().HasData(new User[]
+        {
+            new User() {UserId=1,UserName="u1",PhoneNumber="1111"},
+            new User() {UserId=2,UserName="u2",PhoneNumber="2222"},
+            new User() {UserId=3,UserName="u3",PhoneNumber="3333"},
+        });
+
         OnModelCreatingPartial(modelBuilder);
     }
 
