@@ -107,3 +107,5 @@ https://www.youtube.com/watch?v=7Q17ubqLfaM
 https://he.wikipedia.org/wiki/JWT
 
 https://www.infoworld.com/article/3669188/how-to-implement-jwt-authentication-in-aspnet-core-6.html
+
+https://auth0.com/blog/refresh-tokens-what-are-they-and-when-to-use-them/#Keeping-Refresh-Tokens-Secure

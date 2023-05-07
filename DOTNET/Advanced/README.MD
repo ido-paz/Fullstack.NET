@@ -61,4 +61,6 @@ Hash functions have the property that it is computationally infeasible to genera
 
 https://he.wikipedia.org/wiki/%D7%A4%D7%95%D7%A0%D7%A7%D7%A6%D7%99%D7%99%D7%AA_%D7%92%D7%99%D7%91%D7%95%D7%91
 
+https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.identity.passwordhasher-1?view=aspnetcore-7.0
+
 https://stackoverflow.com/questions/4181198/how-to-hash-a-password/10402129#10402129
