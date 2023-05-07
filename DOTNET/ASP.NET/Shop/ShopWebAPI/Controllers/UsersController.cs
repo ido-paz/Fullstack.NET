@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MessagePack;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using ShopDAL;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
+using ShopWebAPI.DTO;
+using ShopWebAPI.Utils;
 
 namespace ShopWebAPI.Controllers
 {
@@ -12,26 +12,80 @@ namespace ShopWebAPI.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        IConfiguration _Configuration;
+        TokensManager _TokensManager;
         ShopDbContext _ShopDbContext;
 
-        public UsersController(IConfiguration configuration, ShopDbContext shopDbContext)
+        public UsersController(TokensManager tokensManager, ShopDbContext shopDbContext)
         {
-            _Configuration = configuration;
+            _TokensManager = tokensManager;
             _ShopDbContext = shopDbContext;
+        }
+
+        [HttpGet("{userID:int}")]
+        public IActionResult Get(int userID)
+        {
+            var user = _ShopDbContext.Users.Find(userID);
+            if (user == null)
+                return NotFound();
+            else
+                //return Ok(new { user.UserId,user.UserName,user.RoleID});//anonymous class instance
+                return Ok(new UserResponse(user));
+        }
+
+        [HttpPost("register")]
+        public IActionResult Register(User user)
+        {
+            var userInDb = _ShopDbContext.Users.FirstOrDefault(u => u.UserName == user.UserName);
+            if (userInDb == null)
+            {
+                var ph = new PasswordHasher<User>();
+                user.Password = ph.HashPassword(user, user.Password);
+                user.RoleID = 2;// 1 - admin , 2 - user
+                _ShopDbContext.Users.Add(user);
+                _ShopDbContext.SaveChanges();
+                TokensData td = td = CreateTokens(user);
+                return Created($"/users/{user.UserId}", td);
+            }
+            else
+            {
+                return BadRequest("invalid user name ,allready exists");
+            }
         }
 
         [HttpPost("login")]
         public IActionResult Login(User user)
         {
-            var userInDb = _ShopDbContext.Users.FirstOrDefault(u => u.UserName == user.UserName && u.Password == user.Password);
+            var userInDb = _ShopDbContext.Users.FirstOrDefault(u => u.UserName == user.UserName);
+            if (userInDb == null)
+                return Unauthorized("invalid user name or password");
+            else
+            {
+                var ph = new PasswordHasher<User>();
+                var result = ph.VerifyHashedPassword(userInDb, userInDb.Password, user.Password);
+                //var userInDb = _ShopDbContext.Users.FirstOrDefault(u => u.UserName == user.UserName && u.Password == user.Password);
+                //if (userInDb == null)
+                if (userInDb == null || result == PasswordVerificationResult.Failed)
+                    return Unauthorized("invalid user name or password");
+                else
+                {
+                    TokensData td = td = CreateTokens(userInDb);
+                    return Ok(td);
+                }
+            }
+        }
+
+        [HttpPost("refreshToken")]
+        public IActionResult RefreshToken(TokensData td)
+        {
+            var userInDb = _ShopDbContext.Users.FirstOrDefault(u => u.RefreshToken == td.RefreshToken && u.RefreshTokenExpires > DateTime.Now);
             if (userInDb == null)
             {
-                return Unauthorized("invalid user name or password");
+                return Unauthorized("token invalid");
             }
             else
             {
-                return Ok(GetToken(user));
+                td = CreateTokens(userInDb);
+                return Ok(td);
             }
         }
 
@@ -48,34 +102,38 @@ namespace ShopWebAPI.Controllers
             return "Hello World test2";
         }
 
-        string GetToken(User user)
+
+        TokensData CreateTokens(User user)
         {
-            var issuer = _Configuration["Jwt:Issuer"];
-            var audience = _Configuration["Jwt:Audience"];
-            var key = Encoding.ASCII.GetBytes
-            (_Configuration["Jwt:Key"]);
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new[]
-                {
-                new Claim("Id", Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
-                new Claim(JwtRegisteredClaimNames.Email, user.UserName),
-                new Claim(JwtRegisteredClaimNames.Jti,
-                Guid.NewGuid().ToString())
-             }),
-                Expires = DateTime.UtcNow.AddSeconds(30),
-                Issuer = issuer,
-                Audience = audience,
-                SigningCredentials = new SigningCredentials
-                (new SymmetricSecurityKey(key),
-                SecurityAlgorithms.HmacSha512Signature)
-            };
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var jwtToken = tokenHandler.WriteToken(token);
-            return tokenHandler.WriteToken(token);
+            TokensData td = _TokensManager.GetInitializedTokens(user);
+            //SaveCookiesToResponse(td);
+            SaveRefreshToken2DB(user, td);
+            return td;
         }
 
+        void SaveCookiesToResponse(TokensData td)
+        {
+            Response.Cookies.Append("accessToken", td.AccessToken, new CookieOptions()
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.None,
+                Expires = td.AccessTokenExpires
+            });
+            Response.Cookies.Append("refreshToken", td.RefreshToken, new CookieOptions()
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.None,
+                Expires = td.RefreshTokenExpires
+            });
+        }
+
+        void SaveRefreshToken2DB(User userInDb, TokensData td)
+        {
+            userInDb.RefreshToken = td.RefreshToken;
+            userInDb.RefreshTokenExpires = td.RefreshTokenExpires;
+            _ShopDbContext.SaveChanges();
+        }
     }
 }

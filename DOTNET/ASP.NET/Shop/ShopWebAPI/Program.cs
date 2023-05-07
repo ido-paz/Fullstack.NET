@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using ShopDAL;
+using ShopWebAPI.Utils;
 using System.Text;
 
 namespace ShopWebAPI
@@ -12,6 +13,10 @@ namespace ShopWebAPI
         {
             var builder = WebApplication.CreateBuilder(args);
             var shopCS = builder.Configuration.GetConnectionString("Shop");
+            int expiresInSeconds = int.Parse(builder.Configuration.GetSection("Jwt:ExpiresInSeconds").Value);
+            string key = builder.Configuration.GetSection("Jwt:Key").Value;
+            string issuer = builder.Configuration.GetSection("Jwt:Issuer").Value;
+            string audience = builder.Configuration.GetSection("Jwt:Audience").Value;
             // Add services to the container.
             builder.Services.AddDbContext<ShopDbContext>(cfg => cfg.UseSqlServer(shopCS));
             builder.Services.AddLogging(configure => configure.AddConsole());
@@ -30,6 +35,13 @@ namespace ShopWebAPI
                 });
             });
 
+            builder.Services.AddSingleton<TokensManager>(new TokensManager() 
+            {
+                Issuer = issuer,
+                Audience = audience,
+                ExpiresInSeconds = expiresInSeconds, 
+                Key = key 
+            });
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -39,14 +51,15 @@ namespace ShopWebAPI
             {
                 o.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidIssuer = builder.Configuration["Jwt:Issuer"],
-                    ValidAudience = builder.Configuration["Jwt:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey
-                    (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+                    ValidIssuer = issuer,
+                    ValidAudience = audience,
                     ValidateIssuer = true,
                     ValidateAudience = true,
+
+                    IssuerSigningKey = new SymmetricSecurityKey
+                    (Encoding.UTF8.GetBytes(key)),
                     ValidateLifetime = true,
-                    ClockSkew=System.TimeSpan.Zero,
+                    ClockSkew = System.TimeSpan.Zero,
                     ValidateIssuerSigningKey = true
                 };
             });

@@ -10,4 +10,10 @@ public partial class User
     public string? PhoneNumber { get; set; }
 
     public string Password { get; set; } = null!;
+
+    public string? RefreshToken { get; set; }
+
+    public DateTime? RefreshTokenExpires { get; set; }
+
+    public int RoleID { get; set; } 
 }
