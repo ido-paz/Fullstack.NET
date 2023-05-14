@@ -6,6 +6,26 @@ Introduction site https://azure.com/  , managing resourses https://portal.azure.
 
 1. Describe cloud service types: https://learn.microsoft.com/en-us/training/modules/describe-cloud-service-types/
 
-2. Deploy static web site: https://learn.microsoft.com/en-us/azure/static-web-apps/getting-started?tabs=react
+2. Deploy app service: 
+    1. Create web application or web api
+    2. Store the sensitive data that you dont to be exposed in a remote repository in local secrets.json.
+    3. Create repository and publish it to github
+    4. Publish to "Azure App Service (Windows)".
+        1. Select subscription , Create or use existing "App Service"
+        2. Deploy using CI\CD
+        3. Connect to Azure Sql database , Create or use existing 
+        4. Copy the Azure connection string.
+        5. Store it in Azure App settings
+        6. Enable connetion from [your computer ip] to Azure database threw "SQL server" -> "Networking" -> "Security" -> "Firewall rules"
+        7. Run update-database -connection [Azure connection string]
+        8. Commit publish profile to GitHub
+        9. Validate "App service"
 
-3. Deploy app service: https://learn.microsoft.com/en-us/training/modules/publish-azure-web-app-with-visual-studio/1-introduction
+https://learn.microsoft.com/en-us/training/modules/publish-azure-web-app-with-visual-studio/1-introduction
+
+3. Deploy static web site: 
+    1. Open client project
+    2. set the .env.production with the "App service" public domain
+    3. 
+
+https://learn.microsoft.com/en-us/azure/static-web-apps/getting-started?tabs=react
